@@ -16,7 +16,7 @@
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="70dp"
-        android:background="@drawable/rounded_corner_gray"
+        android:background="@drawable/rounded_corner"
         android:padding="10dp">
 
         <Button
@@ -118,14 +118,24 @@
             android:text="0"
             android:textSize="25dp" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonDot"
+            android:layout_toRightOf="@id/buttonZero"
+            android:layout_below="@+id/buttonNine"
+            android:layout_marginLeft="25dp"
+            android:textSize="25dp"
+            android:text="."/>
+
 
         <Button
             android:id="@+id/buttonClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonNine"
+            android:layout_below="@+id/buttonMult"
             android:layout_marginLeft="25dp"
-            android:layout_toRightOf="@+id/buttonZero"
+            android:layout_toRightOf="@+id/buttonEquals"
             android:text="C"
             android:textSize="25dp" />
 
@@ -141,9 +151,9 @@
             android:id="@+id/buttonEquals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonZero"
+            android:layout_below="@+id/buttonDiv"
             android:layout_marginLeft="25dp"
-            android:layout_toRightOf="@+id/buttonMinus"
+            android:layout_toRightOf="@+id/buttonDate"
             android:text="="
             android:textSize="25dp" />
 
@@ -151,11 +161,29 @@
             android:id="@+id/buttonMult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonClear"
+            android:layout_below="@+id/buttonDot"
             android:layout_marginLeft="25dp"
-            android:layout_toRightOf="@id/buttonEquals"
+            android:layout_toRightOf="@id/buttonDiv"
             android:text="x"
             android:textSize="25dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonMinus"
+            android:id="@+id/buttonDate"
+            android:textSize="25dp"
+            android:text="Date"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonZero"
+            android:layout_toRightOf="@+id/buttonMinus"
+            android:layout_marginLeft="25dp"
+            android:textSize="25dp"
+            android:text="/"
+            android:id="@+id/buttonDiv"/>
 
     </RelativeLayout>
 
@@ -164,45 +192,78 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_top"
+        android:fontFamily="@font/calculator_font"
         android:paddingLeft="5dp"
+        android:shadowColor="#BCED09"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
         android:text="total"
-        android:textSize="20dp" />
+        android:textColor="#BCED09"
+        android:textSize="25dp" />
 
 
     <TextView
         android:id="@+id/formulaText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@+id/totalView"
         android:background="@drawable/rounded_corner_bottoms"
+        android:fontFamily="@font/calculator_font"
+        android:padding="5dp"
+        android:shadowColor="#BCED09"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
+        android:textColor="#BCED09"
         android:textSize="50dp" />
 
     <TextView
         android:id="@+id/signText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_below="@+id/formulaText"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corner"
+        android:fontFamily="@font/calculator_font"
+        android:paddingLeft="5dp"
+        android:shadowColor="#BCED09"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
+        android:textColor="#BCED09"
         android:textSize="50dp" />
 
     <TextView
         android:id="@+id/inputView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@+id/signText"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corner_top"
+        android:fontFamily="@font/calculator_font"
         android:paddingLeft="5dp"
+        android:shadowColor="#BCED09"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
         android:text="Input"
-        android:textSize="20dp" />
+        android:textColor="#BCED09"
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/mainText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@+id/inputView"
         android:background="@drawable/rounded_corner_bottoms"
+        android:fontFamily="@font/calculator_font"
+        android:padding="5dp"
+        android:shadowColor="#BCED09"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
+        android:textColor="#BCED09"
         android:textSize="50dp" />
 
     <TextView
@@ -210,10 +271,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp"
-        android:text=""
+        android:layout_marginLeft="110dp"
+        android:layout_marginBottom="20dp"
+        android:text="powered by: "
         android:textColor="#7CA287" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/pokeGif"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="190dp"
+        android:src="@drawable/jolteon" />
 
 
 </RelativeLayout>

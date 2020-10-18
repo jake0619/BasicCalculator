@@ -6,25 +6,26 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     boolean addFunc, subFunc, multFunc, divFunc, eqFunc;
 
-    float total, numTwo;
+    double total;
 
     TextView textView, signView, formulaView;
-    Button buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix, buttonSeven, buttonEight, buttonNine, buttonPlus, buttonEquals, buttonClear, buttonZero,buttonMinus, buttonMult, buttonDiv;
+    Button buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix, buttonSeven,
+            buttonEight, buttonNine, buttonPlus, buttonEquals, buttonClear,
+            buttonZero,buttonMinus, buttonMult, buttonDiv, buttonDate, buttonDot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonMinus = findViewById(R.id.buttonMinus);
         buttonPlus = findViewById(R.id.buttonPlus);
         buttonMult = findViewById(R.id.buttonMult);
-
+        buttonDiv = findViewById(R.id.buttonDiv);
         buttonEquals = findViewById(R.id.buttonEquals);
         buttonClear = findViewById(R.id.buttonClear);
+        buttonDate = findViewById(R.id.buttonDate);
+        buttonDot = findViewById(R.id.buttonDot);
 
         buttonOne.setOnClickListener(this);
         buttonTwo.setOnClickListener(this);
@@ -70,8 +73,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonMinus.setOnClickListener(this);
         buttonPlus.setOnClickListener(this);
         buttonMult.setOnClickListener(this);
+        buttonDiv.setOnClickListener(this);
         buttonEquals.setOnClickListener(this);
         buttonClear.setOnClickListener(this);
+        buttonDate.setOnClickListener(this);
+        buttonDot.setOnClickListener(this);
 
     }
 
@@ -132,47 +138,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 multFunc = true;
                 signView.setText(signView.getText().toString()+"x");
                 break;
-//            case R.id.buttonDiv:
-//                checkPreviousSign();
-//                divFunc = true;
-//                signView.setText(signView.getText().toString()+"x");
-//                break;
-            case R.id.buttonEquals:
+            case R.id.buttonDiv:
                 checkPreviousSign();
-                textView.setText(formulaView.getText());
-                eqFunc = true;
+                divFunc = true;
+                signView.setText(signView.getText().toString()+" / ");
+                break;
+            case R.id.buttonEquals:
+                if(addFunc || subFunc || multFunc || divFunc){
+                    checkPreviousSign();
+                    textView.setText(formulaView.getText());
+                    eqFunc = true;
+                    break;
+                }
+                break;
+
+            case R.id.buttonDate:
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                String date = format1.format(Calendar.getInstance().getTime());
+                Toast.makeText(MainActivity.this,""+date, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.buttonDot:
+                textView.setText(textView.getText()+".");
                 break;
         }
     }
 
     public void checkPreviousSign(){
-        float tempNum = Float.parseFloat(textView.getText().toString());
+        double tempNum = Double.parseDouble(textView.getText().toString());
         if(addFunc){
             total+=tempNum;
             signView.setText(signView.getText().toString()+tempNum);
-
-            formulaView.setText(Float.toString(total));
+            formulaView.setText(Double.toString(total));
             textView.setText(null);
             addFunc = false;
         }
         else if(subFunc){
             total-=tempNum;
             signView.setText(signView.getText().toString()+tempNum);
-            formulaView.setText(Float.toString(total));
+            formulaView.setText(Double.toString(total));
             textView.setText(null);
             subFunc = false;
         }
         else if(multFunc){
             total*=tempNum;
             signView.setText(signView.getText().toString()+tempNum);
-            formulaView.setText(Float.toString(total));
+            formulaView.setText(Double.toString(total));
             textView.setText(null);
             multFunc = false;
         }
         else if(divFunc){
             total/=tempNum;
             signView.setText(signView.getText().toString()+tempNum);
-            formulaView.setText(Float.toString(total));
+            formulaView.setText(Double.toString(total));
             textView.setText(null);
             divFunc = false;
         }
